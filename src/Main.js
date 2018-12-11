@@ -59,6 +59,8 @@ class Main extends React.Component {
                         </Navbar>
                     </div>
                     <Container>
+                        <br/>
+                        <br/>
                         <Route exact path="/" component={Home}/>
                         <Route path="/practice" component={Practice}/>
                         <Route path="/leaderboard" component={Leaderboard}/>
