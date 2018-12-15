@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
+import {Card, CardBody, CardFooter, CardHeader} from "reactstrap";
+import AceEditor from "react-ace";
 
-class LearningCategory extends React.Component {
+class Topic extends React.Component {
 
     constructor(props) {
         super(props);
@@ -21,9 +23,6 @@ class LearningCategory extends React.Component {
     }
 
     componentDidMount() {
-
-        console.log("http://localhost:3001/learning/".concat(this.props.match.params.category, "/", this.props.match.params.topicID));
-
         axios.get("http://localhost:3001/learning/".concat(this.props.match.params.category, "/", this.props.match.params.topicID))
             .then(response => {
                 const topic = response.data;
@@ -33,17 +32,37 @@ class LearningCategory extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>{this.state.topic.name}</h1>
-                <br/>
-                <p>{this.state.topic.theory}</p>
-                <br/>
-                <p>{this.state.topic.codeExample}</p>
-                <br/>
-                <p>{this.state.topic.codeExplanation}</p>
-            </div>
+            <Card className="border-primary mb-3">
+                <CardHeader className="text-center font-weight-bold">
+                    {this.state.topic.name}
+                </CardHeader>
+                <CardBody>
+                    {this.state.topic.theory}
+                </CardBody>
+                <CardFooter className="text-center font-weight-bold">
+                    Code Example
+                </CardFooter>
+                <CardBody>
+                    {this.state.topic.codeExplanation}
+                </CardBody>
+                <CardFooter>
+                    <AceEditor
+                        mode={this.state.topic.category.name.toLowerCase()}
+                        theme="github"
+                        name="codeViewer"
+                        fontSize={14}
+                        showPrintMargin={false}
+                        width={"100%"}
+                        value={this.state.topic.codeExample}
+                        highlightActiveLine={true}
+                        readOnly={true}
+                        editorProps={{$blockScrolling: true}}
+                    />
+                </CardFooter>
+            </Card>
         );
     }
 }
 
-export default LearningCategory;
+
+export default Topic;
