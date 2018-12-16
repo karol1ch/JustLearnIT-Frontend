@@ -1,0 +1,65 @@
+
+header {
+    background: url(../images/first.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.element1 {
+    position: relative;
+    top: 35%;
+    transform: translateY(-35%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+.element1 h1 {
+    font-size: 80px;
+}
+
+.element1 p {
+    font-size: 30px;
+}
+
+.register_button {
+    border-radius: 8px;
+    background-color: white;
+    border: none;
+    color: black;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    opacity: 0.5;
+}
+
+.register_button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.register_button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.register_button:hover span {
+    padding-right: 25px;
+}
+
+.register_button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
