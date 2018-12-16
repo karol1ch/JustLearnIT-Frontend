@@ -12,14 +12,12 @@ import {
     NavbarBrand,
     NavItem,
     Container,
-    Button
 } from "reactstrap";
 
 import Practice from './page/Practice'
-import Leaderboard from "./page/Leaderboard";
+import Maths from "./page/Maths";
 import Learning from "./page/Learning";
 import Submits from "./page/Submits";
-import Profile from "./page/Profile";
 
 class Main extends React.Component {
     render() {
@@ -35,8 +33,8 @@ class Main extends React.Component {
                                              tag={RRNavLink}>Practice</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link btn-primary" to="/leaderboard"
-                                             tag={RRNavLink}>Leaderboard</NavLink>
+                                    <NavLink className="nav-link btn-primary" to="/maths"
+                                             tag={RRNavLink}>Maths</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className="nav-link btn-primary" to="/learning"
@@ -54,7 +52,7 @@ class Main extends React.Component {
                         <br/>
                         <Route exact path="/home" component={Home}/>
                         <Route path="/practice" component={Practice}/>
-                        <Route path="/leaderboard" component={Leaderboard}/>
+                        <Route path="/maths" component={Maths}/>
                         <Route path="/learning" component={Learning}/>
                         <Route path="/submits" component={Submits}/>
                     </Container>
