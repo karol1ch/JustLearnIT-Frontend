@@ -28,7 +28,7 @@ class Main extends React.Component {
                 <div>
                     <div>
                         <Navbar className="navbar navbar-expand-sm bg-primary navbar-dark">
-                            <NavbarBrand tag={RRNavLink} exact to="/">JustLearnIT</NavbarBrand>
+                            <NavbarBrand tag={RRNavLink} exact to="/home">JustLearnIT</NavbarBrand>
                             <Navbar className="nav">
                                 <NavItem>
                                     <NavLink className="nav-link btn-primary" to="/practice"
@@ -47,26 +47,16 @@ class Main extends React.Component {
                                              tag={RRNavLink}>Submits</NavLink>
                                 </NavItem>
                             </Navbar>
-                            <Navbar className="nav navbar-nav ml-auto">
-                                <NavItem>
-                                    <NavLink className="nav-link btn-primary" to="/profile"
-                                             tag={RRNavLink}>Profile</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <Button color="primary">Logout</Button>
-                                </NavItem>
-                            </Navbar>
                         </Navbar>
                     </div>
                     <Container>
                         <br/>
                         <br/>
-                        <Route exact path="/" component={Home}/>
+                        <Route exact path="/home" component={Home}/>
                         <Route path="/practice" component={Practice}/>
                         <Route path="/leaderboard" component={Leaderboard}/>
                         <Route path="/learning" component={Learning}/>
                         <Route path="/submits" component={Submits}/>
-                        <Route path="/profile" component={Profile}/>
                     </Container>
                 </div>
             </HashRouter>
