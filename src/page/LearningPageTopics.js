@@ -2,6 +2,7 @@ import React from "react";
 import {Card, CardBody, CardFooter, CardHeader, NavLink} from "reactstrap";
 import axios from "axios";
 import {NavLink as RRNavLink} from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroller";
 
 
 const Topic = ({topic, categoryName}) => {
@@ -33,24 +34,32 @@ class LearningPageTopics extends React.Component {
                 name: "",
                 description: ""
             },
-            topics: []
+            topics: [],
+            hasMoreTopics: true
         }
     }
 
     componentDidMount() {
-        axios.get("http://localhost:3001/learning/".concat(this.props.match.params.category, "/topics"))
-            .then(response => {
-                const topics = response.data;
-                this.setState({
-                    topics: topics
-                });
-            });
-
         axios.get("http://localhost:3001/learning/".concat(this.props.match.params.category, "/category"))
             .then(response => {
                 const category = response.data;
                 this.setState({
                     category: category
+                });
+            });
+    }
+
+    loadFunction(page) {
+        axios.get("http://localhost:3001/learning/".concat(this.props.match.params.category, "/category/page=", page))
+            .then(result => {
+                const additionalTopics = result.data.list;
+                const hasMoreTopics = result.data.hasMore;
+
+                console.log(result.data);
+
+                this.setState({
+                    topics: this.state.topics.concat(additionalTopics),
+                    hasMoreTopics: hasMoreTopics
                 });
             });
     }
@@ -65,7 +74,18 @@ class LearningPageTopics extends React.Component {
                     {this.state.category.description}
                 </CardBody>
                 <CardFooter>
-                    <Topics topics={this.state.topics} categoryName={this.state.category.name}/>
+                    <InfiniteScroll
+                        pageStart={-1}
+                        loadMore={this.loadFunction.bind(this)}
+                        hasMore={this.state.hasMoreTopics}
+                        loader={
+                            <div className="loader">
+                                Loading ...
+                            </div>
+                        }
+                    >
+                        <Topics topics={this.state.topics} categoryName={this.state.category.name}/>
+                    </InfiniteScroll>
                 </CardFooter>
             </Card>
         );
