@@ -12,8 +12,35 @@ const Result = ({result}) => {
     );
 };
 
-const Results = ({results}) => {
+const CompilationResult = ({submit}) => {
 
+    if (submit.processed === false) {
+        return (<h2>Compiling...</h2>);
+    } else {
+        return (
+            <Table>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>username</th>
+                    <th>problem name</th>
+                    <th>compilation result</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{submit.id}</td>
+                    <td>{submit.username}</td>
+                    <td>{submit.problem.name}</td>
+                    <td>{submit.compilationReturnCode === 0 ? 'OK' : 'ERR'}</td>
+                </tr>
+                </tbody>
+            </Table>
+        )
+    }
+};
+
+const Results = ({results}) => {
     const map = results.map(result => {
         return (<Result result={result}/>)
     });
@@ -32,8 +59,16 @@ const Results = ({results}) => {
             </tbody>
         </Table>
     );
+};
 
-
+const Loading = ({isCompleted}) => {
+    if (isCompleted === true) {
+        return "";
+    } else {
+        return (
+            <h4>Testing...</h4>
+        )
+    }
 };
 
 class SubmitResult extends React.Component {
@@ -42,16 +77,16 @@ class SubmitResult extends React.Component {
         super(props);
 
         this.state = {
-            problemName: null,
+            problemName: "",
+            submit: {
+                processed: false
+            },
             submitResults: [],
             isCompleted: false
         }
     }
 
     componentDidMount() {
-
-        console.log("http://localhost:3001/submit/".concat(this.props.match.params.submitID, "/problem"));
-
         axios.get("http://localhost:3001/submit/".concat(this.props.match.params.submitID, "/problem"))
             .then(result => {
                 const problemName = result.data.name;
@@ -67,6 +102,20 @@ class SubmitResult extends React.Component {
     }
 
     update() {
+
+        if (this.state.submit.processed === false) {
+            axios.get("http://localhost:3001/submit/".concat(this.props.match.params.submitID, "/details"))
+                .then(result => {
+                    const submit = result.data;
+
+                    console.log(submit);
+
+                    if (submit !== "") {
+                        this.setState({submit: submit});
+                    }
+
+                });
+        }
 
         axios.get("http://localhost:3001/submit/".concat(this.props.match.params.submitID, "/result"))
             .then(result => {
@@ -92,9 +141,12 @@ class SubmitResult extends React.Component {
                         {this.state.problemName} | submit: {this.props.match.params.submitID}
                     </CardHeader>
                     <CardBody>
-                        <Results results={this.state.submitResults}/>
+                        <CompilationResult submit={this.state.submit}/>
                     </CardBody>
-                    <CardFooter/>
+                    <CardFooter>
+                        <Results results={this.state.submitResults}/>
+                        <Loading isCompleted={this.state.isCompleted}/>
+                    </CardFooter>
                 </Card>
             </div>
         );

@@ -4,7 +4,6 @@ import AceEditor from "react-ace";
 import {Button, Card, CardBody, CardFooter, CardHeader, Input, InputGroup, InputGroupAddon, NavLink} from "reactstrap";
 import "brace/theme/github";
 import "brace/mode/java";
-import {NavLink as RRNavLink} from "react-router-dom";
 import {withRouter} from "react-router";
 
 const Language = ({language}) => {
@@ -69,10 +68,11 @@ class Problem extends React.Component {
 
                 }, {
                     headers: {'Content-Type': 'application/json'}
-                });
+                }).then(response => {
 
-            this.props.history.push("/practice/".concat(this.props.match.params.category, "/", this.props.match.params.problemID, "/1/result"));
-            // TODO: replace this^^ hardcoded path
+                const submitId = response.data;
+                this.props.history.push("/practice/".concat(this.props.match.params.category, "/", this.props.match.params.problemID, "/", submitId, "/result"));
+            });
         }
     }
 
