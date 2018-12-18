@@ -108,12 +108,9 @@ class SubmitResult extends React.Component {
                 .then(result => {
                     const submit = result.data;
 
-                    console.log(submit);
-
                     if (submit !== "") {
                         this.setState({submit: submit});
                     }
-
                 });
         }
 
