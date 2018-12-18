@@ -12,14 +12,12 @@ import {
     NavbarBrand,
     NavItem,
     Container,
-    Button
 } from "reactstrap";
 
 import Practice from './page/Practice'
-import Leaderboard from "./page/Leaderboard";
+import Maths from "./page/Maths";
 import Learning from "./page/Learning";
 import Submits from "./page/Submits";
-import Profile from "./page/Profile";
 
 class Main extends React.Component {
     render() {
@@ -28,15 +26,15 @@ class Main extends React.Component {
                 <div>
                     <div>
                         <Navbar className="navbar navbar-expand-sm bg-primary navbar-dark">
-                            <NavbarBrand tag={RRNavLink} exact to="/">JustLearnIT</NavbarBrand>
+                            <NavbarBrand tag={RRNavLink} exact to="/home">JustLearnIT</NavbarBrand>
                             <Navbar className="nav">
                                 <NavItem>
                                     <NavLink className="nav-link btn-primary" to="/practice"
                                              tag={RRNavLink}>Practice</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link btn-primary" to="/leaderboard"
-                                             tag={RRNavLink}>Leaderboard</NavLink>
+                                    <NavLink className="nav-link btn-primary" to="/maths"
+                                             tag={RRNavLink}>Maths</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className="nav-link btn-primary" to="/learning"
@@ -47,26 +45,16 @@ class Main extends React.Component {
                                              tag={RRNavLink}>Submits</NavLink>
                                 </NavItem>
                             </Navbar>
-                            <Navbar className="nav navbar-nav ml-auto">
-                                <NavItem>
-                                    <NavLink className="nav-link btn-primary" to="/profile"
-                                             tag={RRNavLink}>Profile</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <Button color="primary">Logout</Button>
-                                </NavItem>
-                            </Navbar>
                         </Navbar>
                     </div>
                     <Container>
                         <br/>
                         <br/>
-                        <Route exact path="/" component={Home}/>
+                        <Route exact path="/home" component={Home}/>
                         <Route path="/practice" component={Practice}/>
-                        <Route path="/leaderboard" component={Leaderboard}/>
+                        <Route path="/maths" component={Maths}/>
                         <Route path="/learning" component={Learning}/>
                         <Route path="/submits" component={Submits}/>
-                        <Route path="/profile" component={Profile}/>
                     </Container>
                 </div>
             </HashRouter>
