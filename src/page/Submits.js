@@ -1,20 +1,20 @@
 import React from 'react';
 import {HashRouter, Route} from "react-router-dom";
 import {Container} from "reactstrap";
-import SubmitsPage from "./SubmitsPage";
-import SubmitsPageSubmitDetails from "./SubmitsPageSubmitDetails";
+import SubmitsPage from "./SubmitsPage"
+import SubmitResult from "./SubmitResult";
 
 class Submits extends React.Component {
     render() {
         return (
-                <HashRouter>
-                    <div>
-                        <Container>
-                            <Route exact path="/submits" component={SubmitsPage}/>
-                            <Route path="/submits/:submit" component={SubmitsPageSubmitDetails}/>
-                        </Container>
-                    </div>
-                </HashRouter>
+            <HashRouter>
+                <div>
+                    <Container>
+                        <Route exact path="/submits" component={SubmitsPage}/>
+                        <Route path="/submits/:submitID" component={SubmitResult}/>
+                    </Container>
+                </div>
+            </HashRouter>
         );
     }
 }

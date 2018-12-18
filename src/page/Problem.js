@@ -72,6 +72,7 @@ class Problem extends React.Component {
                 });
 
             this.props.history.push("/practice/".concat(this.props.match.params.category, "/", this.props.match.params.problemID, "/1/result"));
+            // TODO: replace this^^ hardcoded path
         }
     }
 
