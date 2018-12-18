@@ -1,9 +1,21 @@
 import React from "react";
 import axios from "axios";
 import AceEditor from "react-ace";
-import {Button, Card, CardBody, CardFooter, CardHeader, Input, InputGroup, InputGroupAddon} from "reactstrap";
+import {Button, Card, CardBody, CardFooter, CardHeader, Input, InputGroup, InputGroupAddon, NavLink} from "reactstrap";
 import "brace/theme/github";
 import "brace/mode/java";
+import {NavLink as RRNavLink} from "react-router-dom";
+import {withRouter} from "react-router";
+
+const Language = ({language}) => {
+    return (<option>{language.name}</option>);
+};
+
+const Languages = ({languages}) => {
+    return (languages.map(language => {
+        return (<Language language={language}/>)
+    }));
+};
 
 class Problem extends React.Component {
 
@@ -23,10 +35,13 @@ class Problem extends React.Component {
                 numberOfAcceptedSolutions: 0,
                 difficulty: ""
             },
+            availableLanguages: [],
             code: "",
-            username: ""
+            username: "",
+            programmingLanguage: "",
         };
 
+        this.onChangeSelect = this.onChangeSelect.bind(this);
         this.onChangeEditor = this.onChangeEditor.bind(this);
         this.onChangeInput = this.onChangeInput.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -40,17 +55,24 @@ class Problem extends React.Component {
         this.state.username = newValue.target.value;
     }
 
+    onChangeSelect(newValue) {
+        this.state.programmingLanguage = newValue.target.value;
+    }
+
     onClick() {
-        axios.post(
-            "http://localhost:3001/practice/".concat(this.props.match.params.category, "/", this.props.match.params.problemID, "/submit"),
-            {
-                codeContent: this.state.code.toString(),
-                username: this.state.username.toString(),
-                programmingLanguage: "".concat(this.state.problem.category.name)
-            },
-            {
-                headers: {'Content-Type': 'application/json'}
-            });
+        if (this.state.code !== "" && this.state.username !== "" && this.state.programmingLanguage !== "") {
+            axios.post(
+                "http://localhost:3001/practice/".concat(this.props.match.params.category, "/", this.props.match.params.problemID, "/submit"), {
+                    codeContent: this.state.code.toString(),
+                    username: this.state.username.toString(),
+                    programmingLanguageName: this.state.programmingLanguage
+
+                }, {
+                    headers: {'Content-Type': 'application/json'}
+                });
+
+            this.props.history.push("/practice/".concat(this.props.match.params.category, "/", this.props.match.params.problemID, "/1/result"));
+        }
     }
 
     componentDidMount() {
@@ -58,6 +80,12 @@ class Problem extends React.Component {
             .then(response => {
                 const problem = response.data;
                 this.setState({problem: problem});
+            });
+
+        axios.get("http://localhost:3001/practice/".concat(this.props.match.params.category, "/", this.props.match.params.problemID, "/availableLanguages"))
+            .then(response => {
+                const availableLanguages = response.data;
+                this.setState({availableLanguages: availableLanguages});
             });
     }
 
@@ -96,6 +124,10 @@ class Problem extends React.Component {
                     <InputGroup>
                         <InputGroupAddon addonType="prepend">username</InputGroupAddon>
                         <Input placeholder="username" onChange={this.onChangeInput}/>
+                        <Input type="select" name="select" onChange={this.onChangeSelect}>
+                            <option disabled selected value> -- select language --</option>
+                            <Languages languages={this.state.availableLanguages}/>
+                        </Input>
                         <Button color="primary" onClick={this.onClick}>Submit Code</Button>
                     </InputGroup>
                 </CardFooter>
@@ -104,4 +136,4 @@ class Problem extends React.Component {
     }
 }
 
-export default Problem;
+export default withRouter(Problem);

@@ -43,9 +43,7 @@ class LearningPageTopics extends React.Component {
         axios.get("http://localhost:3001/learning/".concat(this.props.match.params.category, "/category"))
             .then(response => {
                 const category = response.data;
-                this.setState({
-                    category: category
-                });
+                this.setState({category: category});
             });
     }
 
@@ -54,9 +52,6 @@ class LearningPageTopics extends React.Component {
             .then(result => {
                 const additionalTopics = result.data.list;
                 const hasMoreTopics = result.data.hasMore;
-
-                console.log(result.data);
-
                 this.setState({
                     topics: this.state.topics.concat(additionalTopics),
                     hasMoreTopics: hasMoreTopics
