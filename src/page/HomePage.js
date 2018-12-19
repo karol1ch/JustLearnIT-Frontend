@@ -29,22 +29,6 @@ const Announcements = ({announcements}) => {
     });
 };
 
-const Element = ({element}) => {
-    return (
-        <NavLink className="list-group-item list-group-item-action flex-column align-items-start"
-                 to={"/home/".concat(element.name)} tag={RRNavLink}>
-            <li className="list-group-item list-group-item-primary">{element.name}</li>
-            <li className="list-group-item ">{element.shortDescription}</li>
-        </NavLink>
-    )
-};
-
-const ElementList = ({elementList}) => {
-    return elementList.map((element) => {
-        return (<Element element={element}/>);
-    });
-};
-
 const Tip = ({tip}) => {
     return (
         <CardBody>
@@ -169,7 +153,7 @@ class HomePage extends React.Component {
                                 </div>
                             }
                         >
-                            <ElementList elementList={this.state.announcements}/>
+                            <Announcements announcements={this.state.announcements}/>
                         </InfiniteScroll>
                     </ListGroup>
                 </div>
