@@ -26,8 +26,8 @@ const Problem = ({problem, categoryName}) => {
 };
 
 const Problems = ({problems, categoryName}) => {
-    const problemsNode = problems.map((problem) => {
-        return (<Problem problem={problem} categoryName={categoryName} key={problem.id}/>);
+    return problems.map((problem) => {
+        return (<Problem problem={problem} categoryName={categoryName}/>);
     });
 };
 

@@ -49,6 +49,12 @@ class Main extends React.Component {
                                     <NavLink className="nav-link btn-primary" to="/submits"
                                              tag={RRNavLink}>Submits</NavLink>
                                 </NavItem>
+                            </Navbar>
+                            <Navbar className="nav navbar-nav ml-auto">
+                                <NavItem>
+                                    <NavLink className="nav-link btn-primary" to="/sendProblem"
+                                             tag={RRNavLink}>Send your problem!</NavLink>
+                                </NavItem>
                                 <NavItem>
                                     <NavLink className="nav-link btn-primary" to="/contact"
                                              tag={RRNavLink}>Contact</NavLink>
