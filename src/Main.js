@@ -18,6 +18,8 @@ import Practice from './page/Practice'
 import Maths from "./page/Maths";
 import Learning from "./page/Learning";
 import Submits from "./page/Submits";
+import SendProblem from "./page/SendProblem";
+import ProblemSubmitted from "./page/ProblemSubmitted";
 
 class Main extends React.Component {
     render() {
@@ -45,6 +47,13 @@ class Main extends React.Component {
                                              tag={RRNavLink}>Submits</NavLink>
                                 </NavItem>
                             </Navbar>
+
+                            <Navbar className="nav navbar-nav ml-auto">
+                                <NavItem>
+                                    <NavLink className="nav-link btn-primary" to="/sendProblem"
+                                             tag={RRNavLink}>Send your problem!</NavLink>
+                                </NavItem>
+                            </Navbar>
                         </Navbar>
                     </div>
                     <Container>
@@ -55,6 +64,8 @@ class Main extends React.Component {
                         <Route path="/maths" component={Maths}/>
                         <Route path="/learning" component={Learning}/>
                         <Route path="/submits" component={Submits}/>
+                        <Route exact path="/sendProblem" component={SendProblem}/>
+                        <Route path="/sendProblem/submitted" component={ProblemSubmitted}/>
                     </Container>
                 </div>
             </HashRouter>
