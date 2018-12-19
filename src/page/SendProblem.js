@@ -126,7 +126,8 @@ const Categories = ({categories, onChangeMethod}) => {
     return (
         <InputGroup>
             <InputGroupAddon addonType="prepend">Category</InputGroupAddon>
-            <Input type="select" name="select" defaultValue="-- select category --" onChange={value => onChangeMethod(value)}>
+            <Input type="select" name="select" defaultValue="-- select category --"
+                   onChange={value => onChangeMethod(value)}>
                 <option disabled={true}>-- select category --</option>
                 {map}
             </Input>
@@ -138,7 +139,8 @@ const Difficulty = ({onChange}) => {
     return (
         <InputGroup>
             <InputGroupAddon addonType="prepend">Difficulty</InputGroupAddon>
-            <Input type="select" name="select" defaultValue="-- select difficulty level --" onChange={value => onChange(value)}>
+            <Input type="select" name="select" defaultValue="-- select difficulty level --"
+                   onChange={value => onChange(value)}>
                 <option disabled={true}>-- select difficulty level --</option>
                 <option>easy</option>
                 <option>medium</option>
@@ -266,7 +268,7 @@ class SendProblem extends React.Component {
     }
 
     onChangeCategory(newValue) {
-        this.state.category = newValue.target.value;
+        this.setState({category: newValue.target.value});
 
         axios.get("http://localhost:3001/sendProblem/category=".concat(this.state.category, "/languages"))
             .then(result => {

@@ -35,7 +35,7 @@ class Problem extends React.Component {
                 difficulty: ""
             },
             availableLanguages: [],
-            code: "",
+            code: "// place for your code",
             username: "",
             programmingLanguage: "",
         };
@@ -47,15 +47,15 @@ class Problem extends React.Component {
     };
 
     onChangeEditor(newValue) {
-        this.state.code = newValue;
+        this.setState({code: newValue})
     }
 
     onChangeInput(newValue) {
-        this.state.username = newValue.target.value;
+        this.setState({username: newValue.target.value});
     }
 
     onChangeSelect(newValue) {
-        this.state.programmingLanguage = newValue.target.value;
+        this.setState({programmingLanguage: newValue.target.value});
     }
 
     onClick() {
@@ -117,7 +117,7 @@ class Problem extends React.Component {
                         onChange={this.onChangeEditor}
                         showPrintMargin={false}
                         width={"100%"}
-                        value={"// place for your code"}
+                        value={this.state.code}
                         highlightActiveLine={true}
                         editorProps={{$blockScrolling: true}}
                     />
