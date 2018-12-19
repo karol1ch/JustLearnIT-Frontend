@@ -42,7 +42,7 @@ const CompilationResult = ({submit}) => {
 
 const Results = ({results}) => {
     const map = results.map(result => {
-        return (<Result result={result} key={String(result.submit_id) + "_" + String(result.test_id) }/>)
+        return (<Result result={result} key={String(result.submitId) + "_" + String(result.test) }/>)
     });
 
     return (
