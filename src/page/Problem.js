@@ -125,8 +125,9 @@ class Problem extends React.Component {
                     <InputGroup>
                         <InputGroupAddon addonType="prepend">username</InputGroupAddon>
                         <Input placeholder="username" onChange={this.onChangeInput}/>
-                        <Input type="select" name="select"  onChange={this.onChangeSelect}>
-                            <option disabled selected value> -- select language --</option>
+                        <Input type="select" name="select" defaultValue="-- select language --"
+                               onChange={this.onChangeSelect}>
+                            <option disabled={true}>-- select language --</option>
                             <Languages languages={this.state.availableLanguages}/>
                         </Input>
                         <Button color="primary" onClick={this.onClick}>Submit Code</Button>

@@ -126,8 +126,8 @@ const Categories = ({categories, onChangeMethod}) => {
     return (
         <InputGroup>
             <InputGroupAddon addonType="prepend">Category</InputGroupAddon>
-            <Input type="select" name="select" onChange={value => onChangeMethod(value)}>
-                <option disabled selected value> -- select category --</option>
+            <Input type="select" name="select" defaultValue="-- select category --" onChange={value => onChangeMethod(value)}>
+                <option disabled={true}>-- select category --</option>
                 {map}
             </Input>
         </InputGroup>
@@ -138,8 +138,8 @@ const Difficulty = ({onChange}) => {
     return (
         <InputGroup>
             <InputGroupAddon addonType="prepend">Difficulty</InputGroupAddon>
-            <Input type="select" name="select" onChange={value => onChange(value)}>
-                <option disabled selected value> -- select difficulty level --</option>
+            <Input type="select" name="select" defaultValue="-- select difficulty level --" onChange={value => onChange(value)}>
+                <option disabled={true}>-- select difficulty level --</option>
                 <option>easy</option>
                 <option>medium</option>
                 <option>hard</option>
