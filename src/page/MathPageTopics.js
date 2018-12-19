@@ -1,63 +1,64 @@
 import React from "react";
-import {Card, CardBody, CardFooter, CardHeader, NavLink} from "reactstrap";
 import axios from "axios";
-import {NavLink as RRNavLink} from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroller";
+import {NavLink as RRNavLink} from "react-router-dom";
+import {Card, CardBody, CardFooter, CardHeader, NavLink} from "reactstrap";
 
 
-const Topic = ({topic, categoryName}) => {
+
+const MathTopic = ({mathTopic, mathCategoryName}) => {
     return (
         <NavLink className="list-group-item list-group-item-action flex-column align-items-start"
-                 to={"/learning/".concat(categoryName, "/", topic.id)} tag={RRNavLink}>
-            <li className="list-group-item list-group-item-primary">{topic.name}</li>
+                 to={"/math/".concat(mathCategoryName, "/", mathTopic.id)} tag={RRNavLink}>
+            <li className="list-group-item list-group-item-primary">{mathTopic.name}</li>
         </NavLink>
-    );
+    )
 };
 
-const Topics = ({topics, categoryName}) => {
-    const topicsNode = topics.map((topic) => {
-        return (<Topic topic={topic} categoryName={categoryName}/>);
+const MathTopics = ({mathTopics, mathCategoryName}) => {
+    const mathTopicsNode = mathTopics.map((mathTopic) => {
+        return (<MathTopic mathTopic={mathTopic} mathCategoryName={mathCategoryName}/>);
     });
 
     return (
         <ul className="list-group">
-            {topicsNode}
+            {mathTopicsNode}
         </ul>
     );
 };
 
-class LearningPageTopics extends React.Component {
-    constructor(props) {
+class MathPageTopics extends React.Component {
+
+    constructor(props){
         super(props);
         this.state = {
-            category: {
+            mathCategory: {
                 name: "",
                 description: ""
             },
-            topics: [],
+            mathTopics: [],
             hasMoreTopics: true
         }
     }
 
-    componentDidMount() {
-        console.log(this.props.match.params.category);
-        axios.get("http://localhost:3001/learning/".concat(this.props.match.params.category, "/category"))
+    componentDidMount(){
+        axios.get("http://localhost:3001/math/".concat(this.props.match.params.mathCategory, "/mathCategory"))
             .then(response => {
-                const category = response.data;
+                const mathCategory = response.data;
                 this.setState({
-                    category: category
+                    mathCategory: mathCategory
                 });
-            });
+            })
     }
 
     loadFunction(page) {
-        axios.get("http://localhost:3001/learning/".concat(this.props.match.params.category, "/category/page=", page))
+        axios.get("http://localhost:3001/math/".concat(this.props.match.params.mathCategory, "/mathCategory/page=", page))
             .then(result => {
                 const additionalTopics = result.data.list;
                 const hasMoreTopics = result.data.hasMore;
 
                 this.setState({
-                    topics: this.state.topics.concat(additionalTopics),
+                    mathTopics: this.state.mathTopics.concat(additionalTopics),
                     hasMoreTopics: hasMoreTopics
                 });
             });
@@ -66,11 +67,11 @@ class LearningPageTopics extends React.Component {
     render() {
         return (
             <Card className="border-primary mb-3">
-                <CardHeader className="text-center font-weight-bold">
-                    {this.state.category.name}
+                <CardHeader className="text-center font-weight-bold" >
+                    {this.state.mathCategory.name}
                 </CardHeader>
                 <CardBody>
-                    {this.state.category.description}
+                    {this.state.mathCategory.description}
                 </CardBody>
                 <CardFooter>
                     <InfiniteScroll
@@ -83,7 +84,7 @@ class LearningPageTopics extends React.Component {
                             </div>
                         }
                     >
-                        <Topics topics={this.state.topics} categoryName={this.state.category.name}/>
+                        <MathTopics mathTopics={this.state.mathTopics} mathCategoryName={this.state.mathCategory.name}/>
                     </InfiniteScroll>
                 </CardFooter>
             </Card>
@@ -91,4 +92,4 @@ class LearningPageTopics extends React.Component {
     }
 }
 
-export default LearningPageTopics;
+export default MathPageTopics;

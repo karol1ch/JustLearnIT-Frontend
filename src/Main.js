@@ -15,9 +15,10 @@ import {
 } from "reactstrap";
 
 import Practice from './page/Practice'
-import Maths from "./page/Maths";
+import Math from "./page/Math";
 import Learning from "./page/Learning";
 import Submits from "./page/Submits";
+import VisitPage from "./page/VisitPage";
 
 class Main extends React.Component {
     render() {
@@ -26,15 +27,15 @@ class Main extends React.Component {
                 <div>
                     <div>
                         <Navbar className="navbar navbar-expand-sm bg-primary navbar-dark">
-                            <NavbarBrand tag={RRNavLink} exact to="/home">JustLearnIT</NavbarBrand>
+                            <NavbarBrand tag={RRNavLink} to="/home">JustLearnIT</NavbarBrand>
                             <Navbar className="nav">
                                 <NavItem>
                                     <NavLink className="nav-link btn-primary" to="/practice"
                                              tag={RRNavLink}>Practice</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link btn-primary" to="/maths"
-                                             tag={RRNavLink}>Maths</NavLink>
+                                    <NavLink className="nav-link btn-primary" to="/math"
+                                             tag={RRNavLink}>Math</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className="nav-link btn-primary" to="/learning"
@@ -50,9 +51,10 @@ class Main extends React.Component {
                     <Container>
                         <br/>
                         <br/>
-                        <Route exact path="/home" component={Home}/>
+                        <Route exact path="/" component={VisitPage}/>
+                        <Route path="/home" component={Home}/>
                         <Route path="/practice" component={Practice}/>
-                        <Route path="/maths" component={Maths}/>
+                        <Route path="/math" component={Math}/>
                         <Route path="/learning" component={Learning}/>
                         <Route path="/submits" component={Submits}/>
                     </Container>

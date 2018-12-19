@@ -2,7 +2,7 @@ import React from "react";
 import {HashRouter, Route} from "react-router-dom";
 import {Container} from "reactstrap";
 import HomePage from "./HomePage";
-import Announcement1 from "./Announcement1";
+import Announcement from "./Announcement";
 
 class Home extends React.Component {
 
@@ -12,7 +12,7 @@ class Home extends React.Component {
                 <div>
                     <Container>
                         <Route exact path="/home" component={HomePage}/>
-                        <Route path="/home/:name" component={Announcement1}/>
+                        <Route path="/home/:announcementName" component={Announcement}/>
                     </Container>
                 </div>
             </HashRouter>
