@@ -1,24 +1,20 @@
 import React from "react";
+import axios from "axios";
 import {
     NavLink as RRNavLink
 } from "react-router-dom";
-import axios from "axios";
-import {
-    Card,
-    CardBody,
-    CardFooter,
-    CardHeader,
-    NavLink
-} from "reactstrap";
+import {Card, CardBody, CardFooter, CardHeader, NavLink} from "reactstrap";
+
+
 
 const Category = ({category}) => {
-    return (
+    return(
         <NavLink className="list-group-item list-group-item-action flex-column align-items-start"
-                 to={"/learning/".concat(category.name)} tag={RRNavLink}>
+                 to={"/math/".concat(category.name)} tag={RRNavLink}>
             <h5>{category.name}</h5>
             <p className="mb-1">{category.description}</p>
         </NavLink>
-    );
+    )
 };
 
 const Categories = ({categories}) => {
@@ -27,36 +23,37 @@ const Categories = ({categories}) => {
     });
 };
 
-class LearningPage extends React.Component {
+class MathPage extends React.Component {
 
-    constructor(props) {
+    constructor(props){
         super(props);
-        this.state = {
+        this.state ={
             categories: []
         }
     }
 
-    componentDidMount() {
-        axios.get("http://localhost:3001/learning")
+    componentDidMount(){
+        axios.get("http://localhost:3001/math")
             .then(response => {
                 const categories = response.data;
                 this.setState({categories: categories});
             });
     }
 
-    render() {
+    render(){
         return (
-            <Card className="card border-primary mb-3" key={'card3'}>
-                <CardHeader className="text-center font-weight-bold" key={'ch3'}>
-                    Learning Categories
+            <Card className="card border-primary mb-3">
+                <CardHeader className="text-center font-weight-bold">
+                   Math Categories
                 </CardHeader>
-                <CardBody key={'card_body1'}>
-                    <Categories categories={this.state.categories} key={'cats2'}/>
+                <CardBody>
+                    <Categories categories={this.state.categories}/>
                 </CardBody>
                 <CardFooter/>
             </Card>
         );
     }
+
 }
 
-export default LearningPage;
+export default MathPage;
