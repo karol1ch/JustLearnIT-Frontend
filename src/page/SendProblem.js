@@ -100,7 +100,7 @@ const Tests = ({tests, onChangeInput, onChangeOutput, onChangeTime, addMethod}) 
 
     const map = tests.map(test => {
         return (<Test test={test} onChangeInput={onChangeInput} onChangeOutput={onChangeOutput}
-                      onChangeTime={onChangeTime}/>)
+                      onChangeTime={onChangeTime} key={test.id}/>)
     });
 
     return (

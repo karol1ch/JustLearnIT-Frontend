@@ -27,7 +27,7 @@ const Problem = ({problem, categoryName}) => {
 
 const Problems = ({problems, categoryName}) => {
     return problems.map((problem) => {
-        return (<Problem problem={problem} categoryName={categoryName}/>);
+        return (<Problem problem={problem} categoryName={categoryName} key={problem.id}/>);
     });
 };
 
@@ -81,17 +81,19 @@ class PracticePageProblems extends React.Component {
                         loadMore={this.loadFunction.bind(this)}
                         hasMore={this.state.hasMoreProblems}
                         loader={
-                            <div className="loader">
+                            <div className="loader" key={"load546"}>
                                 Loading ...
                             </div>
                         }
                     >
                         <Table>
                             <thead>
+                            <tr>
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Accepted solutions</th>
                                 <th>Difficulty</th>
+                            </tr>
                             </thead>
                             <tbody>
                                 <Problems problems={this.state.problems} categoryName={this.state.category.name}/>
