@@ -18,13 +18,14 @@ import Practice from './page/Practice'
 import Math from "./page/Math";
 import Learning from "./page/Learning";
 import Submits from "./page/Submits";
+import SendProblem from "./page/SendProblem";
+import ProblemSubmitted from "./page/ProblemSubmitted";
 import VisitPage from "./page/VisitPage";
 import Contact from "./page/Contact";
 import About from "./page/About";
 
 class Main extends React.Component {
     render() {
-        // console.log = console.info = console.error = function noop(){};
         return (
             <HashRouter>
                 <div key="main_div_1">
@@ -48,6 +49,12 @@ class Main extends React.Component {
                                     <NavLink className="nav-link btn-primary" to="/submits"
                                              tag={RRNavLink}>Submits</NavLink>
                                 </NavItem>
+                            </Navbar>
+                            <Navbar className="nav navbar-nav ml-auto">
+                                <NavItem>
+                                    <NavLink className="nav-link btn-primary" to="/sendProblem"
+                                             tag={RRNavLink}>Send your problem!</NavLink>
+                                </NavItem>
                                 <NavItem>
                                     <NavLink className="nav-link btn-primary" to="/contact"
                                              tag={RRNavLink}>Contact</NavLink>
@@ -70,6 +77,8 @@ class Main extends React.Component {
                         <Route path="/submits" component={Submits}/>
                         <Route path="/contact" component={Contact}/>
                         <Route path="/about" component={About}/>
+                        <Route exact path="/sendProblem" component={SendProblem}/>
+                        <Route path="/sendProblem/submitted" component={ProblemSubmitted}/>
                     </Container>
                 </div>
             </HashRouter>

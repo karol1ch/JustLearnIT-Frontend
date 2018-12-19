@@ -2,6 +2,7 @@ import React from "react";
 import {Card, CardBody, CardFooter, CardHeader, NavLink, Table} from "reactstrap";
 import axios from "axios";
 import {NavLink as RRNavLink} from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroller";
 
 
 const Problem = ({problem, categoryName}) => {
@@ -25,15 +26,9 @@ const Problem = ({problem, categoryName}) => {
 };
 
 const Problems = ({problems, categoryName}) => {
-    const problemsNode = problems.map((problem) => {
-        return (<Problem problem={problem} categoryName={categoryName} key={problem.id}/>);
+    return problems.map((problem) => {
+        return (<Problem problem={problem} categoryName={categoryName}/>);
     });
-
-    return (
-        <tbody>
-        {problemsNode}
-        </tbody>
-    );
 };
 
 class PracticePageProblems extends React.Component {
@@ -44,24 +39,29 @@ class PracticePageProblems extends React.Component {
                 name: "",
                 description: ""
             },
-            problems: []
+            problems: [],
+            hasMoreProblems: true
         }
     }
 
     componentDidMount() {
-        axios.get("http://localhost:3001/practice/".concat(this.props.match.params.category, "/problems"))
-            .then(response => {
-                const problems = response.data;
-                this.setState({
-                    problems: problems
-                });
-            });
-
         axios.get("http://localhost:3001/practice/".concat(this.props.match.params.category, "/category"))
             .then(response => {
                 const category = response.data;
                 this.setState({
                     category: category
+                });
+            });
+    }
+
+    loadFunction(page) {
+        axios.get("http://localhost:3001/practice/".concat(this.props.match.params.category, "/problems/page=", page))
+            .then(result => {
+                const additionalProblems = result.data.list;
+                const hasMoreProblems = result.data.hasMore;
+                this.setState({
+                    problems: this.state.problems.concat(additionalProblems),
+                    hasMoreProblems: hasMoreProblems
                 });
             });
     }
@@ -76,17 +76,28 @@ class PracticePageProblems extends React.Component {
                     {this.state.category.description}
                 </CardBody>
                 <CardFooter>
-                    <Table>
-                        <thead>
-                        <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Accepted solutions</th>
-                        <th>Difficulty</th>
-                        </tr>
-                        </thead>
-                        <Problems problems={this.state.problems} categoryName={this.state.category.name} key={"problems_id"}/>
-                    </Table>
+                    <InfiniteScroll
+                        pageStart={-1}
+                        loadMore={this.loadFunction.bind(this)}
+                        hasMore={this.state.hasMoreProblems}
+                        loader={
+                            <div className="loader">
+                                Loading ...
+                            </div>
+                        }
+                    >
+                        <Table>
+                            <thead>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Accepted solutions</th>
+                                <th>Difficulty</th>
+                            </thead>
+                            <tbody>
+                                <Problems problems={this.state.problems} categoryName={this.state.category.name}/>
+                            </tbody>
+                        </Table>
+                    </InfiniteScroll>
                 </CardFooter>
             </Card>
         );
