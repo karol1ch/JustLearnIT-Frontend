@@ -26,7 +26,7 @@ const Problem = ({problem, categoryName}) => {
 
 const Problems = ({problems, categoryName}) => {
     const problemsNode = problems.map((problem) => {
-        return (<Problem problem={problem} categoryName={categoryName}/>);
+        return (<Problem problem={problem} categoryName={categoryName} key={problem.id}/>);
     });
 
     return (
@@ -78,12 +78,14 @@ class PracticePageProblems extends React.Component {
                 <CardFooter>
                     <Table>
                         <thead>
+                        <tr>
                         <th>#</th>
                         <th>Name</th>
                         <th>Accepted solutions</th>
                         <th>Difficulty</th>
+                        </tr>
                         </thead>
-                        <Problems problems={this.state.problems} categoryName={this.state.category.name}/>
+                        <Problems problems={this.state.problems} categoryName={this.state.category.name} key={"problems_id"}/>
                     </Table>
                 </CardFooter>
             </Card>

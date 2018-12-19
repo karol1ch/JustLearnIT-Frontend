@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import AceEditor from "react-ace";
-import {Button, Card, CardBody, CardFooter, CardHeader, Input, InputGroup, InputGroupAddon, NavLink} from "reactstrap";
+import {Button, Card, CardBody, CardFooter, CardHeader, Input, InputGroup, InputGroupAddon} from "reactstrap";
 import "brace/theme/github";
 import "brace/mode/java";
 import {withRouter} from "react-router";
@@ -12,7 +12,7 @@ const Language = ({language}) => {
 
 const Languages = ({languages}) => {
     return (languages.map(language => {
-        return (<Language language={language}/>)
+        return (<Language language={language} key={language.name}/>)
     }));
 };
 
@@ -125,7 +125,7 @@ class Problem extends React.Component {
                     <InputGroup>
                         <InputGroupAddon addonType="prepend">username</InputGroupAddon>
                         <Input placeholder="username" onChange={this.onChangeInput}/>
-                        <Input type="select" name="select" onChange={this.onChangeSelect}>
+                        <Input type="select" name="select"  onChange={this.onChangeSelect}>
                             <option disabled selected value> -- select language --</option>
                             <Languages languages={this.state.availableLanguages}/>
                         </Input>

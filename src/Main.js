@@ -18,13 +18,16 @@ import Practice from './page/Practice'
 import Maths from "./page/Maths";
 import Learning from "./page/Learning";
 import Submits from "./page/Submits";
+import Contact from "./page/Contact";
+import About from "./page/About";
 
 class Main extends React.Component {
     render() {
+        // console.log = console.info = console.error = function noop(){};
         return (
             <HashRouter>
-                <div>
-                    <div>
+                <div key="main_div_1">
+                    <div key="main_div_2">
                         <Navbar className="navbar navbar-expand-sm bg-primary navbar-dark">
                             <NavbarBrand tag={RRNavLink} exact to="/home">JustLearnIT</NavbarBrand>
                             <Navbar className="nav">
@@ -44,6 +47,14 @@ class Main extends React.Component {
                                     <NavLink className="nav-link btn-primary" to="/submits"
                                              tag={RRNavLink}>Submits</NavLink>
                                 </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link btn-primary" to="/contact"
+                                             tag={RRNavLink}>Contact</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link btn-primary" to="/about"
+                                             tag={RRNavLink}>About</NavLink>
+                                </NavItem>
                             </Navbar>
                         </Navbar>
                     </div>
@@ -55,6 +66,8 @@ class Main extends React.Component {
                         <Route path="/maths" component={Maths}/>
                         <Route path="/learning" component={Learning}/>
                         <Route path="/submits" component={Submits}/>
+                        <Route path="/contact" component={Contact}/>
+                        <Route path="/about" component={About}/>
                     </Container>
                 </div>
             </HashRouter>
