@@ -31,11 +31,11 @@ const Submit = ({submit}) => {
 };
 
 const Submits = ({submits}) => {
-    const subs = submits.map((submit) => {
-        return (<Submit submit={submit}/>);
+    const subs =  submits.map((submit) => {
+        return (<Submit submit={submit} key={submit.id}/>);
     });
 
-    return (<Table>
+    return (<Table key={"submits_table"}>
 
         <thead>
         <th>ID</th>
