@@ -38,10 +38,12 @@ const Submits = ({submits}) => {
     return (<Table key={"submits_table"}>
 
         <thead>
+        <tr>
         <th>ID</th>
         <th>Username</th>
         <th>Problem</th>
         <th>Compilation Status</th>
+        </tr>
         </thead>
         <tbody>{subs}</tbody>
     </Table>);
@@ -81,7 +83,7 @@ class SubmitsPage extends React.Component {
                         loadMore={this.loadFunction.bind(this)}
                         hasMore={this.state.hasMoreSubmits}
                         loader={
-                            <div className="loader">
+                            <div className="loader" key={'ldr345'}>
                                 Loading ...
                             </div>
                         }
