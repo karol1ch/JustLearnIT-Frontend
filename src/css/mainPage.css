@@ -1,8 +1,14 @@
+body, html {
+    height: 100%;
+}
 
 header {
-    background: url(../images/first.jpg) no-repeat center center;
     background-size: cover;
-    height: 100vh;
+
+    height: 100%;
+
+    background: url(../images/first.jpg) no-repeat fixed center;
+    background-size: cover;
 }
 
 .element1 {
@@ -62,4 +68,3 @@ header {
     opacity: 1;
     right: 0;
 }
-
