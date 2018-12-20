@@ -100,7 +100,7 @@ const Tests = ({tests, onChangeInput, onChangeOutput, onChangeTime, addMethod}) 
 
     const map = tests.map(test => {
         return (<Test test={test} onChangeInput={onChangeInput} onChangeOutput={onChangeOutput}
-                      onChangeTime={onChangeTime} key={test.id}/>)
+                      onChangeTime={onChangeTime} key={test.id + "a"}/>)
     });
 
     return (
@@ -120,13 +120,13 @@ const Category = ({category}) => {
 
 const Categories = ({categories, onChangeMethod}) => {
     const map = categories.map(category => {
-        return (<Category category={category}/>)
+        return (<Category category={category} key={category.name}/>)
     });
 
     return (
-        <InputGroup>
+        <InputGroup key={"igroup666"}>
             <InputGroupAddon addonType="prepend">Category</InputGroupAddon>
-            <Input type="select" name="select" defaultValue="-- select category --"
+            <Input key={"defaultInput4"} type="select" name="select" defaultValue="-- select category --"
                    onChange={value => onChangeMethod(value)}>
                 <option disabled={true}>-- select category --</option>
                 {map}
@@ -285,41 +285,41 @@ class SendProblem extends React.Component {
         return (
             <div>
                 <Card>
-                    <CardHeader className="text-center font-weight-bold">
+                    <CardHeader className="text-center font-weight-bold" key={'ch41'}>
                         Send your problem!
                     </CardHeader>
-                    <CardBody>
+                    <CardBody key={'cb42'}>
                         <Username onChange={this.usernameOnChange.bind(this)}/>
                     </CardBody>
-                    <CardBody>
+                    <CardBody key={'cb43'}>
                         <ProblemName onChange={this.problemNameOnChange.bind(this)}/>
                     </CardBody>
-                    <CardBody>
+                    <CardBody key={'cb44'}>
                         <Categories categories={this.state.categories}
-                                    onChangeMethod={this.onChangeCategory.bind(this)}/>
+                                    onChangeMethod={this.onChangeCategory.bind(this)} key={'catgor4'}/>
                     </CardBody>
-                    <CardBody>
+                    <CardBody key={'cb45'}>
                         <Languages languages={this.state.languages} onChange={this.checkboxOnChange.bind(this)}/>
                     </CardBody>
-                    <CardBody>
+                    <CardBody key={'cb46'}>
                         <Difficulty onChange={this.onChangeDifficulty.bind(this)}/>
                     </CardBody>
-                    <CardBody>
+                    <CardBody key={'cb47'}>
                         <Content onChange={this.contentOnChange.bind(this)}/>
                     </CardBody>
-                    <CardBody>
-                        <InputOutputDesc onChangeInput={this.inputOnChange.bind(this)}
+                    <CardBody key={'cb48'}>
+                        <InputOutputDesc  key={'iodesc34'} onChangeInput={this.inputOnChange.bind(this)}
                                          onChangeOutput={this.outputOnChange.bind(this)}/>
                     </CardBody>
                     <CardHeader className="text-center font-weight-bold">Tests</CardHeader>
-                    <CardBody>
+                    <CardBody key={'cb49'}>
                         <Tests tests={this.state.tests}
                                onChangeInput={this.testInputOnChange.bind(this)}
                                onChangeOutput={this.testOutputOnChange.bind(this)}
                                onChangeTime={this.testTimeMsOnChange.bind(this)}
                                addMethod={this.addMethod.bind(this)}/>
                     </CardBody>
-                    <CardFooter>
+                    <CardFooter  key={'cf50'}>
                         <Button color="primary" onClick={this.onClickSubmit.bind(this)}>Send</Button>
                     </CardFooter>
                 </Card>
