@@ -16,7 +16,7 @@ const Topic = ({topic, categoryName}) => {
 
 const Topics = ({topics, categoryName}) => {
     const topicsNode = topics.map((topic) => {
-        return (<Topic topic={topic} categoryName={categoryName}/>);
+        return (<Topic topic={topic} categoryName={categoryName} key={topic.id}/>);
     });
 
     return (
@@ -40,7 +40,6 @@ class LearningPageTopics extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.category);
         axios.get("http://localhost:3001/learning/".concat(this.props.match.params.category, "/category"))
             .then(response => {
                 const category = response.data;
@@ -78,7 +77,7 @@ class LearningPageTopics extends React.Component {
                         loadMore={this.loadFunction.bind(this)}
                         hasMore={this.state.hasMoreTopics}
                         loader={
-                            <div className="loader">
+                            <div className="loader" key={'loader321'}>
                                 Loading ...
                             </div>
                         }

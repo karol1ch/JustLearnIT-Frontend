@@ -17,7 +17,7 @@ const MathTopic = ({mathTopic, mathCategoryName}) => {
 
 const MathTopics = ({mathTopics, mathCategoryName}) => {
     const mathTopicsNode = mathTopics.map((mathTopic) => {
-        return (<MathTopic mathTopic={mathTopic} mathCategoryName={mathCategoryName}/>);
+        return (<MathTopic mathTopic={mathTopic} mathCategoryName={mathCategoryName} key={mathTopic.id}/>);
     });
 
     return (
@@ -79,10 +79,11 @@ class MathPageTopics extends React.Component {
                         loadMore={this.loadFunction.bind(this)}
                         hasMore={this.state.hasMoreTopics}
                         loader={
-                            <div className="loader">
+                            <div className="loader" key={'loader123'}>
                                 Loading ...
                             </div>
                         }
+                        key={'infiniteScroll1'}
                     >
                         <MathTopics mathTopics={this.state.mathTopics} mathCategoryName={this.state.mathCategory.name}/>
                     </InfiniteScroll>

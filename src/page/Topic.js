@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import {Card, CardBody, CardFooter, CardHeader} from "reactstrap";
 import AceEditor from "react-ace";
+import "brace/theme/github";
+import "brace/mode/java";
 
 class Topic extends React.Component {
 
@@ -23,7 +25,6 @@ class Topic extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.category);
         axios.get("http://localhost:3001/learning/".concat(this.props.match.params.category, "/", this.props.match.params.topicID))
             .then(response => {
                 const topic = response.data;
@@ -48,7 +49,7 @@ class Topic extends React.Component {
                 </CardBody>
                 <CardFooter>
                     <AceEditor
-                        mode={this.state.topic.category.name.toLowerCase()}
+                        mode="java"
                         theme="github"
                         name="codeViewer"
                         fontSize={14}

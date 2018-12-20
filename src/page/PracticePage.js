@@ -25,7 +25,7 @@ const Category = ({category}) => {
 
 const Categories = ({categories}) => {
     return categories.map((category) => {
-        return (<Category category={category}/>);
+        return (<Category category={category} key={category.name}/>);
     });
 };
 
@@ -48,8 +48,8 @@ class PracticePage extends React.Component {
 
     render() {
         return (
-            <Card className="card border-primary mb-3">
-                <CardHeader className="text-center font-weight-bold">
+            <Card className="card border-primary mb-3" key="card1">
+                <CardHeader className="text-center font-weight-bold" key="card_h1">
                     Practice Categories
                 </CardHeader>
                 <CardBody>

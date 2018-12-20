@@ -19,7 +19,7 @@ const Category = ({category}) => {
 
 const Categories = ({categories}) => {
     return categories.map((category) => {
-        return (<Category category={category}/>);
+        return (<Category category={category} key={category.name}/>);
     });
 };
 

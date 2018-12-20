@@ -23,7 +23,7 @@ const Category = ({category}) => {
 
 const Categories = ({categories}) => {
     return categories.map((category) => {
-        return (<Category category={category}/>);
+        return (<Category category={category} key={category.name}/>);
     });
 };
 
@@ -46,12 +46,12 @@ class LearningPage extends React.Component {
 
     render() {
         return (
-            <Card className="card border-primary mb-3">
-                <CardHeader className="text-center font-weight-bold">
+            <Card className="card border-primary mb-3" key={'card3'}>
+                <CardHeader className="text-center font-weight-bold" key={'ch3'}>
                     Learning Categories
                 </CardHeader>
-                <CardBody>
-                    <Categories categories={this.state.categories}/>
+                <CardBody key={'card_body1'}>
+                    <Categories categories={this.state.categories} key={'cats2'}/>
                 </CardBody>
                 <CardFooter/>
             </Card>

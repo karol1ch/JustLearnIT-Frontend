@@ -20,9 +20,7 @@ class Announcement extends React.Component {
         axios.get("http://localhost:3001/home/".concat(this.props.match.params.announcementName))
             .then(response => {
                 const announcement = response.data;
-                console.log(response.data);
                 this.setState({announcement: announcement});
-                console.log(announcement);
             });
 
     }
@@ -30,12 +28,12 @@ class Announcement extends React.Component {
     render() {
         return (
             <Card className="border-primary mb-3">
-              <CardBody>
-                <CardHeader className="text-center font-weight-bold">
-                    <h1>{this.state.announcement.name}</h1>
-                </CardHeader>
+                <CardBody>
+                    <CardHeader className="text-center font-weight-bold">
+                        <h1>{this.state.announcement.name}</h1>
+                    </CardHeader>
                     <p>{this.state.announcement.description}</p>
-               </CardBody>
+                </CardBody>
             </Card>
         );
     }

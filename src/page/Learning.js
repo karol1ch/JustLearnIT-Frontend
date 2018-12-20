@@ -15,11 +15,11 @@ import {
 class Learning extends React.Component {
     render() {
         return (
-            <HashRouter>
-                <div>
-                    <Container>
-                        <Route exact path="/learning" component={LearningPage}/>
-                        <Route path="/learning/:category" component={LearningCategory}/>
+            <HashRouter key={'hr1'}>
+                <div key={'div2'}>
+                    <Container key={'cont1'}>
+                        <Route exact path="/learning" component={LearningPage} key={'learning1'}/>
+                        <Route path="/learning/:category" component={LearningCategory} key={'learn_cat1'}/>
                     </Container>
                 </div>
             </HashRouter>

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import AceEditor from "react-ace";
-import {Button, Card, CardBody, CardFooter, CardHeader, Input, InputGroup, InputGroupAddon, NavLink} from "reactstrap";
+import {Button, Card, CardBody, CardFooter, CardHeader, Input, InputGroup, InputGroupAddon} from "reactstrap";
 import "brace/theme/github";
 import "brace/mode/java";
 import {withRouter} from "react-router";
@@ -12,7 +12,7 @@ const Language = ({language}) => {
 
 const Languages = ({languages}) => {
     return (languages.map(language => {
-        return (<Language language={language}/>)
+        return (<Language language={language} key={language.name}/>)
     }));
 };
 
@@ -35,7 +35,7 @@ class Problem extends React.Component {
                 difficulty: ""
             },
             availableLanguages: [],
-            code: "",
+            code: "// place for your code",
             username: "",
             programmingLanguage: "",
         };
@@ -47,15 +47,15 @@ class Problem extends React.Component {
     };
 
     onChangeEditor(newValue) {
-        this.state.code = newValue;
+        this.setState({code: newValue})
     }
 
     onChangeInput(newValue) {
-        this.state.username = newValue.target.value;
+        this.setState({username: newValue.target.value});
     }
 
     onChangeSelect(newValue) {
-        this.state.programmingLanguage = newValue.target.value;
+        this.setState({programmingLanguage: newValue.target.value});
     }
 
     onClick() {
@@ -110,14 +110,14 @@ class Problem extends React.Component {
                 </CardBody>
                 <CardFooter>
                     <AceEditor
-                        mode={this.state.problem.category.name.toLowerCase()}
+                        mode="java"
                         theme="github"
                         name="codeViewer"
                         fontSize={14}
                         onChange={this.onChangeEditor}
                         showPrintMargin={false}
                         width={"100%"}
-                        value={"// place for your code"}
+                        value={this.state.code}
                         highlightActiveLine={true}
                         editorProps={{$blockScrolling: true}}
                     />
@@ -125,8 +125,9 @@ class Problem extends React.Component {
                     <InputGroup>
                         <InputGroupAddon addonType="prepend">username</InputGroupAddon>
                         <Input placeholder="username" onChange={this.onChangeInput}/>
-                        <Input type="select" name="select" onChange={this.onChangeSelect}>
-                            <option disabled selected value> -- select language --</option>
+                        <Input type="select" name="select" defaultValue="-- select language --"
+                               onChange={this.onChangeSelect}>
+                            <option disabled={true}>-- select language --</option>
                             <Languages languages={this.state.availableLanguages}/>
                         </Input>
                         <Button color="primary" onClick={this.onClick}>Submit Code</Button>
