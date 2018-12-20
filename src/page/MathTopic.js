@@ -27,7 +27,6 @@ class MathTopic extends React.Component {
 
 
     componentDidMount() {
-        console.log(this.props.match.params.mathCategory);
         axios.get("http://localhost:3001/math/".concat(this.props.match.params.mathCategory, "/", this.props.match.params.mathTopicID))
             .then(response => {
                 const mathTopic = response.data;
