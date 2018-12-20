@@ -110,7 +110,7 @@ class Problem extends React.Component {
                 </CardBody>
                 <CardFooter>
                     <AceEditor
-                        mode={this.state.problem.category.name.toLowerCase()}
+                        mode="java"
                         theme="github"
                         name="codeViewer"
                         fontSize={14}

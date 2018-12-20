@@ -40,7 +40,6 @@ class LearningPageTopics extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.category);
         axios.get("http://localhost:3001/learning/".concat(this.props.match.params.category, "/category"))
             .then(response => {
                 const category = response.data;
