@@ -25,7 +25,7 @@ const Announcement = ({announcement}) => {
 
 const Announcements = ({announcements}) => {
     return announcements.map((announcement) => {
-        return (<Announcement announcement={announcement}/>);
+        return (<Announcement announcement={announcement} key={announcement.name}/>);
     });
 };
 
@@ -40,8 +40,9 @@ const Element = ({element}) => {
 };
 
 const ElementList = ({elementList}) => {
+    let i=101;
     return elementList.map((element) => {
-        return (<Element element={element}/>);
+        return (<Element element={element} key={i++ +"xd"}/>);
     });
 };
 
@@ -164,7 +165,7 @@ class HomePage extends React.Component {
                             loadMore={this.loadFunction.bind(this)}
                             hasMore={this.state.hasMoreAnn}
                             loader={
-                                <div className="loader">
+                                <div className="loader" key={'redaol12'}>
                                     Loading ...
                                 </div>
                             }
