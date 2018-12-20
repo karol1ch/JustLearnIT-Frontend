@@ -25,7 +25,7 @@ const Language = ({language, onChange}) => {
 
 const Languages = ({languages, onChange}) => {
     const map = languages.map(language => {
-        return <Language language={language} onChange={onChange}/>
+        return <Language language={language} onChange={onChange} key={language.name}/>
     });
 
     return (
